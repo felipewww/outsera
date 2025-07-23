@@ -1,93 +1,89 @@
-import * as fs from 'fs';
-import { DataParsed } from "./data-parsed"; // or
-
-enum Cols {
-  YEAR = 0,
-  TITLE,
-  STUDIOS,
-  PRODUCERS,
-  WINNER
-}
+import { DataParsed } from "./data-parsed";
+import { Knex } from "knex";
+import { MovieModel } from "../../../data/models/movie.model";
+import { DataParser } from "./data-parser"; // or
 
 export class DataLoader {
 
-  private dataParsed: DataParsed[] = [];
-  private producers: string[] = [];
-  private studios: string[] = [];
+  constructor(private db: Knex) {}
 
-  async load() {
-    const rows = this.loadCsv();
+  public async load(dataParser: DataParser) {
 
-    for (const row of rows) {
-      const cols = row.split(';')
+    await this.loadProducers(dataParser.producers)
+    await this.loadStudios(dataParser.studios)
+    await this.loadMovies(dataParser.dataParsed);
 
-      const producersIds = this.extractProducers(cols[Cols.PRODUCERS]);
-      const studiosIds = this.extractStudios(cols[Cols.STUDIOS]);
+    // const all = await this.db.queryBuilder()
+    //   .table('producers')
+    //   .select('*')
+    // console.log(all)
 
-      this.dataParsed.push({
-        year: parseInt(cols[Cols.YEAR]),
-        title: cols[Cols.TITLE],
-        producers: producersIds,
-        studios: studiosIds,
-        winner: (cols[Cols.WINNER]) ? 1 : 0
+    // const all = await knex.queryBuilder()
+    //   .table('studios')
+    //   .select('*')
+    // console.log(all)
+  }
+
+  private async loadProducers(producers: string[]) {
+    const producersModels = producers.map((producer, idx) => {
+      return {
+        id: idx + 1,
+        name: producer,
+      }
+    })
+
+    await this.db.queryBuilder()
+      .table('producers')
+      .insert(producersModels)
+  }
+
+  private async loadStudios(studios: string[]) {
+    const studioModels = studios.map((studio, idx) => {
+      return {
+        id: idx + 1,
+        name: studio,
+      }
+    })
+
+    await this.db.queryBuilder()
+      .table('studios')
+      .insert(studioModels)
+  }
+
+  private async loadMovies(dataParsed: DataParsed[]) {
+    for (const movie of dataParsed) {
+      const model: MovieModel = {
+        id: movie.id,
+        title: movie.title,
+        year: movie.year,
+        winner: movie.winner,
+      }
+
+      await this.db.queryBuilder()
+        .table('movies')
+        .insert(model, 'id')
+
+      const hasProducers = movie.producers.map((producerId) => {
+        return {
+          movie_id: movie.id,
+          producer_id: producerId
+        }
       })
+
+      await this.db.queryBuilder()
+        .table('movie_has_producer')
+        .insert(hasProducers)
+
+      const hasStudios = movie.studios.map((studioId) => {
+        return {
+          movie_id: movie.id,
+          studio_id: studioId
+        }
+      })
+
+      await this.db.queryBuilder()
+        .table('movie_has_studio')
+        .insert(hasStudios)
     }
-
-    console.log(this.dataParsed);
-  }
-
-  private loadCsv() {
-    const csv = fs.readFileSync('Movielist.csv', 'utf8')
-    const rows = csv.split('\n');
-
-    // remover cabeçalho
-    rows.shift();
-
-    // se a ultima linha for em branco, remover
-    if (!rows[rows.length-1]) {
-      rows.pop();
-    }
-
-    return rows;
-  }
-
-  private extractProducers(producers: string) {
-    const ids: number[] = [];
-
-    const producersArray = producers
-      .replace('and', ', ')
-      .split(',');
-
-    for (const producer of producersArray) {
-      const producerName = producer.trim();
-      const idx = this.producers.indexOf(producerName);
-      if (idx < 0) {
-        this.producers.push(producerName);
-        ids.push(this.producers.length);
-      } else {
-        ids.push(idx);
-      }
-    }
-
-    return ids;
-  }
-
-  private extractStudios(studios: string) {
-    const ids: number[] = [];
-
-    const arr = studios.split(',');
-
-    for (const item of arr) {
-      const itemTrimmed = item.trim();
-      const idx = this.studios.indexOf(itemTrimmed);
-      if (idx < 0) {
-        this.studios.push(itemTrimmed);
-        ids.push(this.studios.length);
-      } else {
-        ids.push(idx);
-      }
-    }
-
-    return ids;
   }
 }

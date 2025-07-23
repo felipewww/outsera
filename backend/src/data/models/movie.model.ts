@@ -1,5 +1,6 @@
 export type MovieModel = {
   id: number | null,
   title: string,
-  year: number
+  year: number,
+  winner: 0 | 1,
 }

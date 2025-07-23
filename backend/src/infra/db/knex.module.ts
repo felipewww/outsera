@@ -1,6 +1,8 @@
 import { Module, Global } from '@nestjs/common';
 import knex from 'knex';
 import knexConfig from '../../../knexfile.js';
+import { DataLoader } from "./data-loader/data-loader";
+import { DataParser } from "./data-loader/data-parser";
 
 @Global()
 @Module({
@@ -9,9 +11,16 @@ import knexConfig from '../../../knexfile.js';
       provide: 'KnexConnection',
       useFactory: async () => {
         const db = knex(knexConfig.development);
-        // Executa migrations automaticamente
-        console.log('Migrações executadas com sucesso!');
+
         await db.migrate.latest();
+        console.log('Migrações executadas com sucesso!');
+
+        const dataParser = new DataParser();
+        await dataParser.parse();
+
+        const dataLoader = new DataLoader(db);
+        await dataLoader.load(dataParser);
+
         return db;
       },
     },
