@@ -35,8 +35,11 @@ export class TopStudios {
   mapToTable() {
     const result: string[][] = [];
     let i = 0;
-    while (i < 3) {
-      const studio = this.studios().studios[i];
+    for (const studio of this.studios().studios) {
+      if (i === 3) {
+        break;
+      }
+
       result.push([
         studio.name,
         studio.winCount.toString()

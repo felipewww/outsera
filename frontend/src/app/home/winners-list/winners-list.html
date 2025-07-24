@@ -1,1 +1,31 @@
-<p>winners-list works!</p>
+<app-card [title]="'List movie winners by year'">
+  <div class="input-group mb-3">
+    <input
+      type="number"
+      class="form-control"
+      min="1900"
+      max="2025"
+      step="1"
+      [(ngModel)]="year"
+      placeholder="Search by year">
+    <button (click)="search(true)" class="btn btn-primary" type="button" id="button-addon2">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+  <app-table [headers]="tableHeader" [data]="mapToTable()"></app-table>
+
+  <app-pagination (pageChange)="search()" />
+<!--  @if (totalPages() > 1) {-->
+<!--    <div>-->
+<!--      <ul class="pagination flex-wrap">-->
+<!--        @for (n of pages(); track $index) {-->
+<!--          <li-->
+<!--            (click)="changePage(n)"-->
+<!--            class="page-item" [class.active]="(n === currentPage())">-->
+<!--            <div class="page-link">{{n}}</div>-->
+<!--          </li>-->
+<!--        }-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  }-->
+</app-card>
