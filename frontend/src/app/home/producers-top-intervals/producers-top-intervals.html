@@ -1,1 +1,6 @@
-<p>producers-top-intervals works!</p>
+<app-card [title]="'Producers with longest and shortest intervals between wins'">
+  <h6>Maximum</h6>
+  <app-table [headers]="tableHeader" [data]="mapMaxToTable()"></app-table>
+  <h6>Minimum</h6>
+  <app-table [headers]="tableHeader" [data]="mapMinToTable()"></app-table>
+</app-card>

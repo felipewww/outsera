@@ -1,6 +1,6 @@
 import {Component, signal} from '@angular/core';
 import {MoviesService} from '../../../services/movies.service';
-import {YearsMultipleWinnersDto} from '../../../services/dtos/years-multiple-winners.dto';
+import {YearsMultipleWinnersResponse} from '../../../services/dtos/years-multiple-winners.dto';
 import {Table, TableHeader} from '../../../components/table/table';
 import {Card} from '../../../components/card/card';
 
@@ -14,7 +14,7 @@ import {Card} from '../../../components/card/card';
   styleUrl: './list-multiple-winners.css'
 })
 export class ListMultipleWinners {
-  movies = signal<YearsMultipleWinnersDto>({
+  movies = signal<YearsMultipleWinnersResponse>({
     years: []
   })
 

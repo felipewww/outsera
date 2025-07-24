@@ -3,6 +3,6 @@ export type YearWinnersCount = {
   winnerCount: number;
 }
 
-export type YearsMultipleWinnersDto = {
+export type YearsMultipleWinnersResponse = {
   years: YearWinnersCount[];
 }
