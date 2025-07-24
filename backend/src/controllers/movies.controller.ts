@@ -1,5 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
-import { ReadProducersIntervalUseCase } from "../application/use-cases/producers/read-producers-interval/read-producers-interval.use-case";
+import { Controller, Get, Query } from "@nestjs/common";
 import { ListMoviesUseCase } from "../application/use-cases/movies/list-movies/list-movies.use-case";
 
 @Controller('movies')
@@ -9,7 +8,13 @@ export class MoviesController {
   ) {}
 
   @Get()
-  getProducersInterval() {
-    return this.listMoviesUseCase.handle({});
+  getList(
+    @Query('page') page: number,
+    @Query('winner') winner: 0 | 1,
+  ) {
+    return this.listMoviesUseCase.handle({
+      page: (page) ? page : 1,
+      winner
+    });
   }
 }
