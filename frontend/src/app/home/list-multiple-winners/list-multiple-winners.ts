@@ -2,11 +2,13 @@ import {Component, signal} from '@angular/core';
 import {MoviesService} from '../../../services/movies.service';
 import {YearsMultipleWinnersDto} from '../../../services/dtos/years-multiple-winners.dto';
 import {Table, TableHeader} from '../../../components/table/table';
+import {Card} from '../../../components/card/card';
 
 @Component({
   selector: 'list-multiple-winners',
   imports: [
-    Table
+    Table,
+    Card
   ],
   templateUrl: './list-multiple-winners.html',
   styleUrl: './list-multiple-winners.css'
