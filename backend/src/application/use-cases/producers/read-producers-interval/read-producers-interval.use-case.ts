@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { MoviesDataSource } from "../../../../data/movies.data-source";
 import { UseCase } from "../../use-case";
 import { IntervalResult, ReadProducersIntervalOutput } from "./read-producers-interval.output";
@@ -17,7 +17,11 @@ export class ReadProducersIntervalUseCase extends UseCase<ReadProducersIntervalI
   async handle(params: ReadProducersIntervalInput) {
     const data = await this.producersDataSource.getWinnersGrouped()
 
-    const { min, max } = this.calcInterval(data)
+    if (!data.length) {
+      throw new NotFoundException("No intervals found")
+    }
+
+    const { min, max } = this.calcInterval(data);
 
     const result: ReadProducersIntervalOutput = {
       min,
@@ -28,10 +32,6 @@ export class ReadProducersIntervalUseCase extends UseCase<ReadProducersIntervalI
   }
 
   private calcInterval(data: ProducerWinsModelView[]) {
-    if (!data.length) {
-      return { min: [], max: [] };
-    }
-
     const allIntervals: IntervalResult[] = [];
 
     for (const row of data) {

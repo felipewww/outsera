@@ -1,5 +1,5 @@
 import { UseCase } from "../../use-case";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { MoviesDataSource } from "../../../../data/movies.data-source";
 import { ListMoviesOutput } from "./list-movies.output";
 import { ListMoviesInput } from "./list-movies.input";
@@ -17,6 +17,10 @@ export class ListMoviesUseCase extends UseCase<ListMoviesInput, ListMoviesOutput
       page: params.page,
       winner: params.winner,
     })
+
+    if (!result.length) {
+      throw new NotFoundException("No movies found")
+    }
 
     return result;
   }
