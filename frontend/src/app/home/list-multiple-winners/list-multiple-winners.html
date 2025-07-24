@@ -1,1 +1,8 @@
-<p>list-multiple-winners works!</p>
+<ul>
+  @for (movie of movies().years; track $index) {
+    <li>
+      {{movie.year}}
+      {{movie.winnerCount}}
+    </li>
+  }
+</ul>
