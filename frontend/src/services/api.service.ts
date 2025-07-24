@@ -25,16 +25,5 @@ export abstract class ApiService {
 
   protected toQueryParams(params: Record<string, any>): string {
     return new URLSearchParams(params).toString();
-    // const query = Object.entries(params)
-    //   .filter(
-    //     ([_, value]) => value !== undefined && value !== null
-    //   )
-    //   .map(
-    //     ([key, value]) =>
-    //     `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    //   )
-    //   .join('&');
-    //
-    // return query ? `?${query}` : '';
   }
 }

@@ -9,6 +9,7 @@ import {Pagination} from '../../../components/pagination/pagination';
 
 @Component({
   selector: 'winners-list',
+  standalone: true,
   imports: [
     Card,
     Table,

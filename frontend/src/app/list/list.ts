@@ -12,7 +12,7 @@ type Filters = {
 
 @Component({
   selector: 'app-list',
-  standalone: true,
+  // standalone: true,
   imports: [
     Pagination,
     Table
@@ -102,10 +102,10 @@ export class List {
     this.paginationComponent.reset();
 
     if (this.filtersCols().Winner.trim()) {
-      this.filters().winner = this.filtersCols().Winner
+      this.filters().winner = (this.filtersCols().Winner === 'true') ? true : false
     }
 
-    if (this.filtersCols().Year) {
+    if (this.filtersCols().Year.trim()) {
       this.filters().year = this.filtersCols().Year
     }
 
