@@ -5,7 +5,7 @@ export type IntervalResult = {
   followingWin: number;
 };
 
-export type ReadProducerGreaterIntervalOutput = {
+export type ReadProducersIntervalOutput = {
   min: IntervalResult[],
   max: IntervalResult[],
 }

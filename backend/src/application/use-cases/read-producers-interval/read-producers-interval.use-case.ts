@@ -1,33 +1,24 @@
 import { Injectable } from "@nestjs/common";
 import { MoviesDataSource } from "../../../data/movies.data-source";
 import { UseCase } from "../use-case";
-import { IntervalResult, ReadProducerGreaterIntervalOutput } from "./read-producer-greater-interval.output";
-import { ReadProducerGreaterIntervalInput } from "./read-producer-greater-interval.input";
+import { IntervalResult, ReadProducersIntervalOutput } from "./read-producers-interval.output";
+import { ReadProducersIntervalInput } from "./read-producers-interval.input";
 import { ProducerWinsModelView } from "../../../data/model-views/producer-wins.model-view";
 
 @Injectable()
-export class ReadProducerGreaterIntervalUseCase extends UseCase<ReadProducerGreaterIntervalInput, ReadProducerGreaterIntervalOutput> {
+export class ReadProducersIntervalUseCase extends UseCase<ReadProducersIntervalInput, ReadProducersIntervalOutput> {
   constructor(
     private readonly moviesDataSource: MoviesDataSource
   ) {
     super();
-    // this.moviesDataSource.getGreaterInterval()
-    //   .then((greaterInterval) => {
-    //     console.log(greaterInterval);
-    //     const { min, max } = this.calcInterval(greaterInterval)
-    //
-    //     console.log('min, max, allIntervals??')
-    //     console.log(min)
-    //     console.log(max)
-    //   })
   }
 
-  async handle(params: ReadProducerGreaterIntervalInput) {
+  async handle(params: ReadProducersIntervalInput) {
     const data = await this.moviesDataSource.getWinnersGrouped()
 
     const { min, max } = this.calcInterval(data)
 
-    const result: ReadProducerGreaterIntervalOutput = {
+    const result: ReadProducersIntervalOutput = {
       min,
       max,
     }
