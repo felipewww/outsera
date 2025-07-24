@@ -13,7 +13,7 @@ import { DataParser } from "./data-loader/data-parser";
         const db = knex(knexConfig.development);
 
         await db.migrate.latest();
-        console.log('Migrações executadas com sucesso!');
+        // console.log('Migrações executadas com sucesso!');
 
         const dataParser = new DataParser();
         await dataParser.parse();
