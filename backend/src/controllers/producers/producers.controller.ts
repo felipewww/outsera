@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 import {
   ReadProducersIntervalUseCase
-} from "../application/use-cases/producers/read-producers-interval/read-producers-interval.use-case";
+} from "../../application/use-cases/producers/read-producers-interval/read-producers-interval.use-case";
 
 @Controller('producers')
 export class ProducerController {
