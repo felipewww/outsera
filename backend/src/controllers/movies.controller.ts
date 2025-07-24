@@ -1,14 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
-import { ReadProducersIntervalUseCase } from "../application/use-cases/read-producers-interval/read-producers-interval.use-case";
+import { ReadProducersIntervalUseCase } from "../application/use-cases/producers/read-producers-interval/read-producers-interval.use-case";
+import { ListMoviesUseCase } from "../application/use-cases/movies/list-movies/list-movies.use-case";
 
 @Controller('movies')
 export class MoviesController {
   constructor(
-    private readonly readProducerGreaterIntervalUseCase: ReadProducersIntervalUseCase
+    private readonly listMoviesUseCase: ListMoviesUseCase
   ) {}
 
   @Get()
-  getProducerGreaterInterval() {
-    return this.readProducerGreaterIntervalUseCase.handle({});
+  getProducersInterval() {
+    return this.listMoviesUseCase.handle({});
   }
 }

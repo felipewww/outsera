@@ -1,20 +1,21 @@
 import { Injectable } from "@nestjs/common";
-import { MoviesDataSource } from "../../../data/movies.data-source";
-import { UseCase } from "../use-case";
+import { MoviesDataSource } from "../../../../data/movies.data-source";
+import { UseCase } from "../../use-case";
 import { IntervalResult, ReadProducersIntervalOutput } from "./read-producers-interval.output";
 import { ReadProducersIntervalInput } from "./read-producers-interval.input";
-import { ProducerWinsModelView } from "../../../data/model-views/producer-wins.model-view";
+import { ProducerWinsModelView } from "../../../../data/model-views/producer-wins.model-view";
+import { ProducersDataSource } from "../../../../data/producers.data-source";
 
 @Injectable()
 export class ReadProducersIntervalUseCase extends UseCase<ReadProducersIntervalInput, ReadProducersIntervalOutput> {
   constructor(
-    private readonly moviesDataSource: MoviesDataSource
+    private readonly producersDataSource: ProducersDataSource
   ) {
     super();
   }
 
   async handle(params: ReadProducersIntervalInput) {
-    const data = await this.moviesDataSource.getWinnersGrouped()
+    const data = await this.producersDataSource.getWinnersGrouped()
 
     const { min, max } = this.calcInterval(data)
 

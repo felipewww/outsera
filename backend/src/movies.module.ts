@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { MoviesController } from "./controllers/movies.controller";
-import { ReadProducersIntervalUseCase } from "./application/use-cases/read-producers-interval/read-producers-interval.use-case";
 import { MoviesDataSource } from "./data/movies.data-source";
+import { ListMoviesUseCase } from "./application/use-cases/movies/list-movies/list-movies.use-case";
 
 @Module({
   controllers: [MoviesController],
-  providers: [ReadProducersIntervalUseCase, MoviesDataSource],
+  providers: [ListMoviesUseCase, MoviesDataSource],
 })
 export class MoviesModule {}
