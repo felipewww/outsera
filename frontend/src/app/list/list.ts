@@ -64,7 +64,6 @@ export class List {
   }
 
   ngAfterViewInit() {
-    this.filters().page = this.paginationComponent.getCurrentPage()
     this.search()
   }
 
@@ -80,6 +79,8 @@ export class List {
   }
 
   search() {
+    this.filters().page = this.paginationComponent.getCurrentPage()
+
     this.movieService.list(this.filters())
       .subscribe(
         (data) => {
@@ -97,6 +98,8 @@ export class List {
   searchWithFilters() {
     delete this.filters().winner;
     delete this.filters().year;
+
+    this.paginationComponent.reset();
 
     if (this.filtersCols().Winner.trim()) {
       this.filters().winner = this.filtersCols().Winner
