@@ -53,6 +53,7 @@ export class WinnersList {
     const filters: ListMoviesInput = {
       page: this.paginationComponent.getCurrentPage(),
       size: 10,
+      winner: true,
     }
 
     if (this.year()) {

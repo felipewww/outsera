@@ -1,9 +1,43 @@
 <div class="table-responsive">
   <table class="table table-striped table-hover table-bordered">
     <thead>
-      <tr>
+      <tr [formGroup]="filterForm">
         @for (header of headers; track $index) {
-          <th scope="col">{{ header.label }}</th>
+          <th scope="col">
+            <div class="d-flex align-items-center justify-content-center text-center">
+              <div>
+                {{ header.label }}
+              </div>
+            </div>
+            @if (header.filter && header.filter.type === 'text') {
+              <div>
+                <input class="form-control form-control-sm"
+                       type="text"
+                       [formControlName]="header.label"
+                       (keyup.enter)="applyFilter()"
+                       placeholder="Filtrar por {{ header.label }}">
+              </div>
+            }
+
+            @if (
+              header.filter
+              && header.filter.type === 'options'
+              && header.filter.options
+              && header.filter.options.length
+            ) {
+              <div>
+                <select
+                  class="form-control"
+                  [formControlName]="header.label"
+                  (change)="applyFilter()"
+                >
+                  @for (opt of header.filter.options; track $index) {
+                    <option [value]="opt.value">{{opt.label}}</option>
+                  }
+                </select>
+              </div>
+            }
+          </th>
         }
       </tr>
     </thead>

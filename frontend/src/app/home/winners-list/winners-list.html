@@ -15,17 +15,4 @@
   <app-table [headers]="tableHeader" [data]="mapToTable()"></app-table>
 
   <app-pagination (pageChange)="search()" />
-<!--  @if (totalPages() > 1) {-->
-<!--    <div>-->
-<!--      <ul class="pagination flex-wrap">-->
-<!--        @for (n of pages(); track $index) {-->
-<!--          <li-->
-<!--            (click)="changePage(n)"-->
-<!--            class="page-item" [class.active]="(n === currentPage())">-->
-<!--            <div class="page-link">{{n}}</div>-->
-<!--          </li>-->
-<!--        }-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  }-->
 </app-card>

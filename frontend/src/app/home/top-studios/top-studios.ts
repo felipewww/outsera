@@ -6,6 +6,7 @@ import {MoviesService} from '../../../services/movies.service';
 
 @Component({
   selector: 'top-studios',
+  standalone: true,
   imports: [
     Card,
     Table

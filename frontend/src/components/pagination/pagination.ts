@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output, signal} from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
+  standalone: true,
   imports: [],
   templateUrl: './pagination.html',
   styleUrl: './pagination.css'

@@ -1,1 +1,8 @@
-<p>list works!</p>
+<h3 class="page-title">List Movies</h3>
+
+<app-table
+  (filtersApplied)="searchWithFilters()"
+  [filters]="filtersCols()"
+  [headers]="tableHeader"
+  [data]="mapToTable()" />
+<app-pagination (pageChange)="searchPage()" />
