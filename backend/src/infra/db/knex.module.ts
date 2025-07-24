@@ -1,6 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import knex from 'knex';
-import knexConfig from '../../../knexfile.js';
+import knexConfig from '../../../knexfile';
 import { DataLoader } from "./data-loader/data-loader";
 import { DataParser } from "./data-loader/data-parser";
 

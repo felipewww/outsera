@@ -11,6 +11,7 @@ export class MoviesController {
   getList(
     @Query('page') page: number,
     @Query('winner') winner: 0 | 1,
+
   ) {
     return this.listMoviesUseCase.handle({
       page: (page) ? page : 1,

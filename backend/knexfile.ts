@@ -1,4 +1,4 @@
-const config= {
+const config = {
   development: {
     client: 'sqlite3',
     connection: {
