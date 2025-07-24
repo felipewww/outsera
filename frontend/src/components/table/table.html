@@ -1,0 +1,28 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        @for (header of headers; track $index) {
+          <th scope="col">{{ header.label }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @if (hasData) {
+        @for (item of data; track $index) {
+        <tr>
+          @for (header of headers; track $index) {
+            <td>{{ item[$index] }}</td>
+          }
+        </tr>
+        }
+      } @else {
+        <tr>
+          <td [attr.colspan]="headers.length" class="text-center text-muted py-4">
+            Nenhum dado para exibir.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,8 +1,9 @@
-<ul>
-  @for (movie of movies().years; track $index) {
-    <li>
-      {{movie.year}}
-      {{movie.winnerCount}}
-    </li>
-  }
-</ul>
+<app-table [headers]="tableHeader" [data]="mapYearToTableData()"></app-table>
+<!--<ul>-->
+<!--  @for (movie of movies().years; track $index) {-->
+<!--    <li>-->
+<!--      {{movie.year}}-->
+<!--      {{movie.winnerCount}}-->
+<!--    </li>-->
+<!--  }-->
+<!--</ul>-->

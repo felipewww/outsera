@@ -1,10 +1,13 @@
 import {Component, signal} from '@angular/core';
 import {MoviesService} from '../../../services/movies.service';
 import {YearsMultipleWinnersDto} from '../../../services/dtos/years-multiple-winners.dto';
+import {Table, TableHeader} from '../../../components/table/table';
 
 @Component({
   selector: 'list-multiple-winners',
-  imports: [],
+  imports: [
+    Table
+  ],
   templateUrl: './list-multiple-winners.html',
   styleUrl: './list-multiple-winners.css'
 })
@@ -13,6 +16,11 @@ export class ListMultipleWinners {
     years: []
   })
 
+  tableHeader: TableHeader[] = [
+    { label: 'Year'} ,
+    { label: 'Wins Count' }
+  ]
+
   constructor(
     private movieService: MoviesService,
   ) {
@@ -20,5 +28,14 @@ export class ListMultipleWinners {
       .subscribe(
         (data) => this.movies.set(data)
       );
+  }
+
+  mapYearToTableData() {
+    return this.movies().years.map(info => {
+      return [
+        info.year.toString(),
+        info.winnerCount.toString()
+      ]
+    })
   }
 }
