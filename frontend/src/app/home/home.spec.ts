@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Home } from './home';
+import {HttpClientModule, provideHttpClient} from '@angular/common/http';
+import {HttpClientTestingModule, provideHttpClientTesting} from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
+import {of} from 'rxjs';
 
 describe('Home', () => {
   let component: Home;
@@ -8,7 +12,13 @@ describe('Home', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Home]
+      imports: [
+        HttpClientModule,
+        Home
+      ],
+      providers: [
+        // provideHttpClientTesting(),
+      ]
     })
     .compileComponents();
 

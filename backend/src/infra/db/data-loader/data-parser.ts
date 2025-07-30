@@ -29,8 +29,8 @@ export class DataParser {
         title: cols[Cols.TITLE],
         producers: producersIds,
         studios: studiosIds,
-        winner: (cols[Cols.WINNER]) ? 1 : 0
-      })
+        winner: (cols[Cols.WINNER]) ? 1 : 0,
+      });
     }
   }
 
@@ -58,12 +58,15 @@ export class DataParser {
 
     for (const producer of producersArray) {
       const producerName = producer.trim();
-      const idx = this.producers.indexOf(producerName);
-      if (idx < 0) {
-        this.producers.push(producerName);
-        ids.push(this.producers.length);
-      } else {
-        ids.push(idx);
+      if (producerName) {
+        const idx = this.producers.indexOf(producerName);
+
+        if (idx < 0) {
+          this.producers.push(producerName);
+          ids.push(this.producers.length);
+        } else {
+          ids.push(idx+1);
+        }
       }
     }
 

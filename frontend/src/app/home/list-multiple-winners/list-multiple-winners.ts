@@ -6,6 +6,7 @@ import {Card} from '../../../components/card/card';
 
 @Component({
   selector: 'list-multiple-winners',
+  standalone: true,
   imports: [
     Table,
     Card

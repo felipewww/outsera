@@ -6,6 +6,7 @@ import {ProducersIntervalResponse} from '../../../services/dtos/max-min-Interval
 
 @Component({
   selector: 'producers-top-intervals',
+  standalone: true,
   imports: [
     Card,
     Table

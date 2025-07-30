@@ -1,11 +1,12 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import { List } from './list';
 import { MoviesService } from '../../services/movies.service';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {HttpClientTestingModule, provideHttpClientTesting} from '@angular/common/http/testing';
 import {mockMoviesResponse} from '../../test/movies-service.mock';
 import {of} from 'rxjs';
 import {Pagination} from '../../components/pagination/pagination';
 import {MovieItem} from '../../services/dtos/list-movies.dto';
+import {ActivatedRoute} from '@angular/router';
 
 describe('List', () => {
   let component: List;

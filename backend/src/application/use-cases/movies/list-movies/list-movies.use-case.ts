@@ -1,5 +1,5 @@
 import { UseCase } from "../../use-case";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { MoviesDataSource } from "../../../../data/movies.data-source";
 import { ListMoviesOutput } from "./list-movies.output";
 import { ListMoviesInput } from "./list-movies.input";

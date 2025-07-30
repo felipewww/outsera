@@ -12,7 +12,7 @@ type Filters = {
 
 @Component({
   selector: 'app-list',
-  // standalone: true,
+  standalone: true,
   imports: [
     Pagination,
     Table

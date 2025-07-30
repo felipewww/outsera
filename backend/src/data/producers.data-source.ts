@@ -20,7 +20,7 @@ export class ProducersDataSource extends DataSource{
       .from('movies AS M')
       .innerJoin('movie_has_producer AS MP', 'MP.movie_id', 'M.id')
       .innerJoin('producers AS P', 'P.id', 'MP.producer_id')
-      .where('M.winner', 1)
+      .where('M.winner', true)
       .orderBy('M.year', 'DESC')
       .orderBy('MP.producer_id', 'DESC')
       .groupBy('MP.producer_id')

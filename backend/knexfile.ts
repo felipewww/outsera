@@ -3,6 +3,7 @@ const config = {
     client: 'sqlite3',
     connection: {
       filename: ':memory:',
+      // filename: './mydb.sqlite'
     },
     useNullAsDefault: true,
     migrations: {

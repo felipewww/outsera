@@ -6,7 +6,13 @@ import {WinnersList} from './winners-list/winners-list';
 
 @Component({
   selector: 'app-home',
-  imports: [ListMultipleWinners, TopStudios, ProducersTopIntervals, WinnersList],
+  standalone: true,
+  imports: [
+    ListMultipleWinners,
+    TopStudios,
+    ProducersTopIntervals,
+    WinnersList
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

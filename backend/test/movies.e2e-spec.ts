@@ -66,6 +66,32 @@ describe('MoviesController (e2e)', () => {
     }
   });
 
+  it('should return the correct producer intervals data', async () => {
+    const response = await request(app.getHttpServer()).get('/producers/intervals');
+
+    expect(response.status).toBe(200);
+
+    expect(response.body).toHaveProperty('min');
+    expect(response.body).toHaveProperty('max');
+
+    expect(Array.isArray(response.body.min)).toBe(true);
+    expect(response.body.min[0]).toHaveProperty('producer', 'Joel Silver');
+    expect(response.body.min[0]).toHaveProperty('interval', 1);
+    expect(response.body.min[0]).toHaveProperty('previousWin', 1990);
+    expect(response.body.min[0]).toHaveProperty('followingWin', 1991);
+
+    expect(Array.isArray(response.body.max)).toBe(true);
+    expect(response.body.max[0]).toHaveProperty('producer', 'Matthew Vaughn');
+    expect(response.body.max[0]).toHaveProperty('interval', 13);
+    expect(response.body.max[0]).toHaveProperty('previousWin', 2002);
+    expect(response.body.max[0]).toHaveProperty('followingWin', 2015);
+  });
+
+  it('deve retornar 404 caso não encontre filmes', async () => {
+    const response = await request(app.getHttpServer()).get('/movies?page=1000');
+    expect(response.status).toBe(404);
+  });
+
   afterAll(async () => {
     await app.close();
   });
