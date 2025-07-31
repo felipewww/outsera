@@ -21,8 +21,7 @@ describe('Pagination Component', () => {
   });
 
   it('should initialize currentPage to 1', () => {
-    // Cast 'component' to 'any' to access protected properties
-    expect((component as any).currentPage()).toBe(1);
+    expect(component.getCurrentPage()).toEqual(0);
   });
 
   it('should initialize totalPages to 1', () => {
@@ -52,7 +51,7 @@ describe('Pagination Component', () => {
       spyOn(component.pageChange, 'emit');
       // @ts-ignore
       component.changePage(3);
-      expect((component as any).currentPage()).toBe(3);
+      expect(component.getCurrentPage()).toEqual(2);
       expect(component.pageChange.emit).toHaveBeenCalledWith(3);
     });
   });
@@ -65,16 +64,16 @@ describe('Pagination Component', () => {
       (component as any).pages.set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
-    it('should reset currentPage to 1', () => {
+    it('should reset currentPage to 0', () => {
       component.reset();
-      expect((component as any).currentPage()).toBe(1);
+      expect(component.getCurrentPage()).toEqual(0);
     });
   });
 
   describe('getCurrentPage', () => {
     it('should return the current value of currentPage signal', () => {
       (component as any).currentPage.set(7);
-      expect(component.getCurrentPage()).toBe(7);
+      expect(component.getCurrentPage()).toBe(6);
     });
   });
 });

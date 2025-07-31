@@ -44,7 +44,7 @@ describe('List', () => {
   });
 
   it('should initialize filters signal', () => {
-    expect(component.filters()).toEqual({ page: 1, size: 10 });
+    expect(component.filters()).toEqual({ page: 0, size: 10 });
   });
 
   it('should initialize filtersCols signal', () => {

@@ -40,6 +40,7 @@ export class Pagination {
   }
 
   getCurrentPage() {
-    return this.currentPage();
+    // api is zero based, always return -1 of ui page number
+    return this.currentPage() - 1;
   }
 }
